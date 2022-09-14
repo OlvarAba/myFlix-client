@@ -19,7 +19,7 @@ export class MainView extends React.Component {
   }
 
   componentDidMount(){
-    axios.get('https://https://mantiflix.herokuapp.com/movies')
+    axios.get('https://mantiflix.herokuapp.com/movies')
       .then(response => {
         this.setState({
           movies: response.data
