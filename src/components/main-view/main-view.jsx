@@ -6,6 +6,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
+
+
 export class MainView extends React.Component {
 
   constructor(){
@@ -13,8 +15,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      user: null,
-      registered: null
+      user: null
     };
   }
 
@@ -30,21 +31,23 @@ export class MainView extends React.Component {
       });
   }
 
+ 
   setSelectedMovie(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
-  onLoggedIn(user) {
+ 
+  onRegistration(register) {
     this.setState({
-      user
+      register,
     });
   }
 
-  onRegistration(registered) {
+  onLoggedIn(user) {
     this.setState({
-      registered
+      user
     });
   }
 
