@@ -145,6 +145,7 @@
     "prop-types": "^15.8.1",
     "queue-microtask": "^1.2.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "readable-stream": "^2.3.7",
     "readdirp": "^3.6.0",
