@@ -11,13 +11,11 @@ import Col from 'react-bootstrap/Col';
 
 
 export class MainView extends React.Component {
-
-  constructor(){
+  constructor() {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
-      user: null
+      selectedMovie: null
     };
   }
 
@@ -34,9 +32,9 @@ export class MainView extends React.Component {
   }
 
  
-  setSelectedMovie(movie) {
+  setSelectedMovie(newSelectedMovie) {
     this.setState({
-      selectedMovie: movie
+      selectedMovie: newSelectedMovie
     });
   }
 
@@ -54,26 +52,16 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, registered } = this.state;
-
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-    if (!registered) return <RegistrationView onRegistration={(register) => this.onRegistration(register)} />;
-
-    if (movies.length === 0) return <div className="main-view"></div>;
-
+    const { movies, selectedMovie } = this.state;
+  
+    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+  
     return (
       <div className="main-view">
         {selectedMovie
-          ? (
-            <Row className="justify-content-md-center">
-              <col md={8}>
-              <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-              </col>
-            </Row>
-          )
+          ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
           : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+            <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }}/>
           ))
         }
       </div>
@@ -81,7 +69,5 @@ export class MainView extends React.Component {
   }
 
 }
-
-export default MainView
-
-
+    
+  export default MainView
