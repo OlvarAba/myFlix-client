@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Form, Button,} from 'react-bootstrap';
+import {Form, Button, Card, CardGroup, Container, Col, Row} from 'react-bootstrap';
+
+import './registration-view.scss';
 
 export function RegistrationView(props) {
     const [ username, setUsername ] = useState('');
@@ -10,12 +12,17 @@ export function RegistrationView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password, email, birthday);
-        props.onRegistration(username);
+       props.onRegistration(username)
     };
 
     return (
-      <Form>
+      <Container>
+        <Row>
+          <Col>
+          <CardGroup>
+            <Card>
+              <Card.Title>Register Here!</Card.Title>
+            <Form>
         <Form.Group>
           <Form.Label>Username:</Form.Label>
           <Form.Control
@@ -25,7 +32,6 @@ export function RegistrationView(props) {
             required
             placeholder="Enter a username"
           />
-          
         </Form.Group>
   
         <Form.Group>
@@ -38,7 +44,6 @@ export function RegistrationView(props) {
             minLength={8}
             placeholder="Password must be 8 characters long"
           />
-          
         </Form.Group>
   
         <Form.Group>
@@ -61,10 +66,19 @@ export function RegistrationView(props) {
           />
         </Form.Group>
   
-        <Button type="submit" onClick={handleSubmit}>
-          Register
+        <Button variant="primary" type="submit" onClick={handleSubmit}>Submit
         </Button>
       </Form>
+
+            </Card>
+          
+
+          </CardGroup>
+          
+          </Col>
+        </Row>
+      </Container>
+      
     );
   }
   
