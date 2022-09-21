@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 import './movie-view.scss';
 
@@ -13,6 +15,8 @@ export class MovieView extends React.Component {
   componentDidMount() {
     document.addEventListener('keypress', this.keypressCallback);
   }
+
+  
 
 
   render() {
@@ -31,13 +35,22 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
+        <div>
+        <Link to={`/directors/${movie.Director.Name}`}>
+       <Button variant="link">Director</Button>
+        </Link>
+
+<Link to={`/genres/${movie.Genre.Name}`}>
+  <Button variant="link">Genre</Button>
+</Link>
+        </div>
         <div className="movie-Director">
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
         </div>
         <button onClick={() => { onBackClick(null); }}>Back</button>
-
        </div>
+       
     );
   }
 }
