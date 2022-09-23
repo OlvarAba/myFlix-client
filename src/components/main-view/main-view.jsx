@@ -1,17 +1,18 @@
 import React from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
+import { Row, Col } from 'react-bootstrap';
+import { NavBar } from '../navbar/navbar';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
-import { GenreView } from '../genre-view/genre-view';
+import { Genreview } from '../genre-view/genre-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { ProfileView } from '../profile-view/profile-view';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -33,6 +34,24 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null,
+    });
+    window.open("/", "_self");
+  }
 
   getMovies(token) {
     axios.get('https://mantiflix.herokuapp.com/movies', {
@@ -48,22 +67,6 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
-
-
-
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-  }
-
   render() {
     const { movies, user } = this.state;
     return (
@@ -131,4 +134,5 @@ return <Col>
   }
 }
     
-  export default MainView
+    
+    export default MainView
