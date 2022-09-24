@@ -11,6 +11,7 @@ import { DirectorView } from '../director-view/director-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { GenreView } from '../genre-view/genre-view';
+import { Link } from "react-router-dom";
 
 import './main-view.scss';
 
@@ -121,9 +122,9 @@ export class MainView extends React.Component {
               return (
                 <Col>
                   <ProfileView
+                    movies={movies}
                     user={user}
                     onBackClick={() => history.goBack()}
-                    movies={movies}
                   />
                 </Col>
               );

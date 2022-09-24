@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import axios from "axios";
 import './registration-view.scss';
 
 export function RegistrationView(props) {
+    const [ name, setName] = useState('');
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ email, setEmail ] = useState('');
@@ -18,6 +20,10 @@ export function RegistrationView(props) {
 
     const validate = () => {
       let isReq = true;
+      if (name) {
+        setValues({ values, nameErr: "Name is required"});
+        isReq = false;
+      }
       if (!username) {
         setValues({ values, usernameErr: "Username is required" });
         isReq = false;  
