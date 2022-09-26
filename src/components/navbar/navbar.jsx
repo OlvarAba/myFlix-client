@@ -41,4 +41,3 @@ export function NavBar({user}) {
         </NavBar>
     );
 }
-  
